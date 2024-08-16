@@ -1,0 +1,146 @@
+
+
+
+.wrapper{
+    width: 250px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    perspective-origin: 50% calc(50% - 5em);
+    font-size: 40px;
+}
+
+.box{
+    width: 4em;
+    height: 4em;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: rotateBox 20s infinite linear;
+}
+
+@keyframes rotateBox{
+    to {transform: rotateY(360deg);}
+}
+
+.side{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    background-color: rgba(117, 216, 255, 0.1);
+    box-shadow: 0px 0px 1em rgba(0, 0, 0, 0.8) inset;
+}
+
+.front{
+    transform: translateZ(2em);
+    background: rgb(99, 219, 255, 0.8);
+}
+
+.back{
+    transform: rotateY(180deg)  translateZ(2em);
+    background: rgb(99, 219, 255, 0.8);
+}
+
+.right{
+    transform: rotateY(90deg) translateZ(2em);
+    background: rgb(99, 219, 255, 0.8);
+}
+
+.left{
+    transform: rotateY(270deg) translateZ(2em);
+    background: rgb(99, 219, 255, 0.8);
+}
+
+
+.top{
+    transform: translateY(-50%) rotateX(90deg);
+    background: rgb(99, 219, 255, 0.8);
+}
+
+.bottom{
+    transform: translateY(50%) rotateX(90deg);
+    background: rgb(99, 219, 255, 0.8);
+    box-shadow: 0px 0px 1em rgba(0, 0, 0, 0.8);
+}
+
+
+
+/* @import url("https://fonts.googleapis.com/css?family=Raleway:400"); */
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 90deg;
+  inherits: true;
+}
+
+@property --gradX {
+  syntax: '<percentage>';
+  initial-value: 50%;
+  inherits: true;
+}
+
+@property --gradY {
+  syntax: '<percentage>';
+  initial-value: 0%;
+  inherits: true;
+}
+
+p {
+  margin: 0;
+}
+
+:root {
+  --d: 2500ms;
+  --angle: 90deg;
+  --gradX: 100%;
+  --gradY: 50%;
+  --c1: rgba(168, 239, 255, 1);
+  --c2: rgba(168, 239, 255, 0.1);
+}
+
+
+
+.box1 {
+  font-size: 3vw;
+  margin: max(1rem, 3vw);
+  border: 0.35rem solid;
+  padding: 3vw;
+  border-image: conic-gradient(from var(--angle), var(--c2), var(--c1) 0.1turn, var(--c1) 0.15turn, var(--c2) 0.25turn) 30;
+  animation: borderRotate var(--d) linear infinite forwards;
+}
+
+.box1:nth-child(2) {
+  border-image: radial-gradient(ellipse at var(--gradX) var(--gradY), var(--c1), var(--c1) 10%, var(--c2) 40%) 30;
+  animation: borderRadial var(--d) linear infinite forwards;
+}
+
+@keyframes borderRotate {
+  100% {
+    --angle: 420deg;
+  }
+}
+
+@keyframes borderRadial {
+  20% {
+    --gradX: 100%;
+    --gradY: 50%;
+  }
+  40% {
+    --gradX: 100%;
+    --gradY: 100%;
+  }
+  60% {
+    --gradX: 50%;
+    --gradY: 100%;
+  }
+  80% {
+    --gradX: 0%;
+    --gradY: 50%;
+  }
+  100% {
+    --gradX: 50%;
+    --gradY: 0%;
+  }
+}
